@@ -1,0 +1,71 @@
+﻿@page "/login"
+@using System.ComponentModel.DataAnnotations
+@rendermode InteractiveServer
+@inject AccountApiClient AccountApi
+@inject NavigationManager NavManager
+
+<h3>Login</h3>
+
+<EditForm Model="@loginModel" OnValidSubmit="HandleLogin">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <label>Email</label>
+        <InputText @bind-Value="loginModel.Email" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Password</label>
+        <InputText @bind-Value="loginModel.Password" class="form-control" type="password" />
+    </div>
+
+    <button class="btn btn-primary" type="submit" disabled="@isLoading">
+        @if (isLoading)
+        {
+            <span class="spinner-border spinner-border-sm">Logining ...</span>
+        }
+        else
+        {
+            <span>Login</span>
+        }
+    </button>
+</EditForm>
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger mt-3">@errorMessage</div>
+}
+
+@code {
+    private LoginModel loginModel = new();
+    private bool isLoading;
+    private string? errorMessage;
+
+    private async Task HandleLogin()
+    {
+        try
+        {
+            isLoading = true;
+            var success = await AccountApi.LoginAsync(loginModel.Email, loginModel.Password);
+            if (success)
+                NavManager.NavigateTo("/");
+        }
+        catch (Exception ex)
+        {
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    public class LoginModel
+    {
+        [Required(ErrorMessage = "Email is require")]
+        public string Email { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Password is require")]
+        public string Password { get; set; } = string.Empty;
+    }
+}

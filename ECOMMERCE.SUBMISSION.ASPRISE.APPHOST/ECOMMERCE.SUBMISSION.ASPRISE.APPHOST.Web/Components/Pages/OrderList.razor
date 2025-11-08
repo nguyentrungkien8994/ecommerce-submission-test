@@ -1,0 +1,55 @@
+﻿@* @page "/orders"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@inject NavigationManager Nav
+
+<h3>Orders List</h3>
+
+<button class="btn btn-primary mb-3" @onclick="AddNew">
+    + Create New Order
+</button>
+
+@if (orders == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (orders.Count == 0)
+{
+    <p>No orders found.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Specification ID</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in orders)
+            {
+                <tr>
+                    <td>@order.Name</td>
+                    <td>@order.Specification_Id</td>
+                    <td>@order.Amount</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Order>? orders;
+
+    protected override async Task OnInitializedAsync()
+    {
+        orders = await OrderService.GetAllAsync();
+    }
+    private void AddNew()
+    {
+        Nav.NavigateTo("/orders/create");
+    }
+}
+ *@

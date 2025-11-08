@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ECOMMERCE.SUBMISSION.DATA\ECOMMERCE.SUBMISSION.DATA.csproj" />
+    <ProjectReference Include="..\ECOMMERCE.SUBMISSION.DTO\ECOMMERCE.SUBMISSION.DTO.csproj" />
+  </ItemGroup>
+
+</Project>

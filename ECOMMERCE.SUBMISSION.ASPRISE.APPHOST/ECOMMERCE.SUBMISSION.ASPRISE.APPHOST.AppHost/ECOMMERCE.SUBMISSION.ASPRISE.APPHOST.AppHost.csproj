@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Sdk Name="Aspire.AppHost.Sdk" Version="9.0.0" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsAspireHost>true</IsAspireHost>
+    <UserSecretsId>9233ffac-28d9-441a-afbb-3226856f64e9</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ECOMMERCE.SUBMISSION.API.ACCOUNT\ECOMMERCE.SUBMISSION.API.ACCOUNT.csproj" />
+    <ProjectReference Include="..\..\ECOMMERCE.SUBMISSION.API.EMAIL\ECOMMERCE.SUBMISSION.API.EMAIL.csproj" />
+    <ProjectReference Include="..\..\ECOMMERCE.SUBMISSION.API.ORDER\ECOMMERCE.SUBMISSION.API.ORDER.csproj" />
+    <ProjectReference Include="..\..\ECOMMERCE.SUBMISSION.API.PAYMENT\ECOMMERCE.SUBMISSION.API.PAYMENT.csproj" />
+    <ProjectReference Include="..\ECOMMERCE.SUBMISSION.ASPRISE.APPHOST.ApiService\ECOMMERCE.SUBMISSION.ASPRISE.APPHOST.ApiService.csproj" />
+    <ProjectReference Include="..\ECOMMERCE.SUBMISSION.ASPRISE.APPHOST.Web\ECOMMERCE.SUBMISSION.WEB.ADMIN.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.0.0" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pixelz - Payment notification</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style type="text/css">
+      /* Reset styles */
+      body,
+      #bodyTable,
+      #bodyCell {
+        height: 100% !important;
+        width: 100% !important;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+      }
+
+      table {
+        border-spacing: 0;
+        border-collapse: collapse;
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+      }
+
+      table td {
+        border-collapse: collapse;
+      }
+
+      img {
+        -ms-interpolation-mode: bicubic;
+        border: 0;
+        height: auto;
+        line-height: 100%;
+        outline: none;
+        text-decoration: none;
+        display: block;
+      }
+
+      p {
+        margin: 0 0 16px 0;
+      }
+
+      /* Main styles */
+      .main-container {
+        background-color: #cfcfcf;
+        width: 100%;
+      }
+
+      .content-container {
+        background-color: #ffffff;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .header {
+        padding: 60px 60px 48px 60px;
+      }
+
+      .logo-container {
+        margin-bottom: 48px;
+      }
+
+      .logo {
+        width: 86px;
+        height: 20px;
+      }
+
+      .content {
+        padding: 0 60px;
+      }
+
+      .heading {
+        font-family: "Inter", sans-serif;
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 1.2;
+        color: #1a1a1a;
+        margin: 0 0 32px 0;
+      }
+
+      .text {
+        font-family: "Inter", sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 1.5;
+        letter-spacing: -1.2%;
+        color: #707070;
+        margin: 0 0 16px 0;
+      }
+
+      .button-container {
+        margin-top: 32px;
+        margin-bottom: 48px;
+      }
+
+      .button {
+        background-color: #9fe870;
+        border-radius: 100px;
+        display: inline-block;
+        padding: 10px 24px 10px 20px;
+        text-decoration: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .button:hover {
+        opacity: 0.8;
+      }
+
+      .button-text {
+        font-family: "Inter", sans-serif;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 1.5;
+        color: #141414;
+        text-decoration: none;
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      .button-icon {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 8px;
+        width: 24px;
+        height: 24px;
+      }
+
+      .divider {
+        border-top: 1px solid #ececec;
+        margin: 0 0 48px 0;
+      }
+
+      .footer {
+        padding: 48px 60px 60px 60px;
+      }
+
+      .footer-text {
+        font-family: "Inter", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 1.4;
+        color: #8f8f8f;
+        margin: 0 0 12px 0;
+      }
+
+      .footer-link {
+        font-family: "Inter", sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 1.4;
+        color: #141414;
+        text-decoration: none;
+      }
+
+      /* Mobile styles */
+      @media screen and (max-width: 600px) {
+        .logo-container {
+          margin-bottom: 32px;
+        }
+
+        .content-container {
+          width: 100% !important;
+        }
+
+        .header,
+        .content,
+        .footer {
+          padding-left: 28px !important;
+          padding-right: 28px !important;
+        }
+
+        .header {
+          padding-top: 28px;
+          padding-bottom: 40px;
+        }
+
+        .footer {
+          padding-top: 40px;
+          padding-bottom: 28px;
+        }
+
+        .heading {
+          font-size: 28px !important;
+          margin-bottom: 28px;
+        }
+
+        .text {
+          font-size: 14px !important;
+        }
+
+        .footer-link {
+          display: block !important;
+          margin-left: 0 !important;
+          margin-top: 4px !important;
+        }
+      }
+    </style>
+  </head>
+  <body style="margin: 0; padding: 0; background-color: #cfcfcf">
+    <!-- Main table -->
+    <table
+      border="0"
+      cellpadding="0"
+      cellspacing="0"
+      width="100%"
+      class="main-container"
+    >
+      <tr>
+        <td align="center" valign="top">
+          <!-- Content table -->
+          <table
+            border="0"
+            cellpadding="0"
+            cellspacing="0"
+            width="100%"
+            class="content-container"
+            style="max-width: 600px"
+          >
+            <!-- Header -->
+            <tr>
+              <td align="left" valign="top" class="header">
+                <!-- Logo -->
+                <table
+                  border="0"
+                  cellpadding="0"
+                  cellspacing="0"
+                  width="100%"
+                  class="logo-container"
+                >
+                  <tr>
+                    <td align="left" valign="top">
+                      <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td>
+                            <!-- Logo images combined as a table -->
+                            <table
+                              border="0"
+                              cellpadding="0"
+                              cellspacing="0"
+                              class="logo"
+                            >
+                              <tr>
+                                <td>
+                                  <a
+                                    href="https://pixelz.com/"
+                                    style="text-decoration: none"
+                                  >
+                                    <img
+                                      src=""
+                                      alt="ValuX"
+                                      class="logo"
+                                    />
+                                  </a>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Content -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                  <tr>
+                    <td align="left" valign="top">
+                      <h1 class="heading">Payment Notification</h1>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left" valign="top">
+                      <p class="text">
+                        Xin chào {{Name}},<br />
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Divider -->
+            <tr>
+              <td align="center" valign="top">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                  <tr>
+                    <td class="divider"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td align="left" valign="top" class="footer">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                  <tr>
+                    <td align="left" valign="top">
+                      <table
+                        border="0"
+                        cellpadding="0"
+                        cellspacing="0"
+                        width="100%"
+                      >
+                        <tr>
+                          <td>
+                            <span class="footer-text"
+                              >Gặp sự cố với tài khoản của bạn?</span
+                            >
+                            <a
+                              href="https://pizelz.com/"
+                              class="footer-link"
+                              style="display: inline-block"
+                              >Liên hệ với chúng tôi</a
+                            >
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="left" valign="top" style="padding-top: 12px">
+                      <p class="footer-text" style="margin: 0">
+                        Trân trọng,<br />Đội ngũ Pixelz
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

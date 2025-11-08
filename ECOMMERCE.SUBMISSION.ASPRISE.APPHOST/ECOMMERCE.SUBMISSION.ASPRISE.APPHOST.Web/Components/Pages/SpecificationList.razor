@@ -1,0 +1,55 @@
+﻿
+@page "/specification"
+@using ECOMMERCE.SUBMISSION.DTO
+@rendermode InteractiveServer
+@inject NavigationManager Nav
+@inject OrderApiClient OrderApiClient
+<h3>Specifications</h3>
+
+<button class="btn btn-primary mb-3" @onclick="addNew">+ Add new</button>
+
+@if (specifications == null)
+{
+    <p><em>Loading data...</em></p>
+}
+else if (specifications.Count == 0)
+{
+    <p>Empty data.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Instructions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in specifications)
+            {
+                <tr>
+                    <td>@item.name</td>
+                    <td>@item.instructions</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<SpecificationDTO>? specifications;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            specifications = await OrderApiClient.GetSpecificationsAsync();
+
+            StateHasChanged();
+        }
+    }
+    private void addNew(){
+        Nav.NavigateTo("/specification/create");
+    }
+}

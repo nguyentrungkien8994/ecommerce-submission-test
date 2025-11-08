@@ -1,0 +1,6 @@
+@ECOMMERCE.SUBMISSION.API.ORDER_HostAddress = http://localhost:5251
+
+GET {{ECOMMERCE.SUBMISSION.API.ORDER_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

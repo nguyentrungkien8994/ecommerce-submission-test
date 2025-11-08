@@ -1,0 +1,72 @@
+﻿@* @page "/orders/create"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@inject NavigationManager Nav
+
+<h3>Create New Order</h3>
+
+<EditForm Model="@model" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <label>Order Name</label>
+        <InputText @bind-Value="model.Name" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Specification</label>
+        <InputSelect @bind-Value="model.Specification_Id" class="form-control">
+            <option value="">-- Select Specification --</option>
+            @foreach (var spec in specifications)
+            {
+                <option value="@spec.Id">@spec.Name</option>
+            }
+        </InputSelect>
+    </div>
+
+    <div class="mb-3">
+        <label>Amount</label>
+        <InputNumber @bind-Value="model.Amount" class="form-control" step="0.01" />
+    </div>
+
+    <button class="btn btn-success" type="submit">Save</button>
+    <button class="btn btn-secondary ms-2" @onclick="cancel">Cancel</button>
+</EditForm>
+
+@if (!string.IsNullOrEmpty(message))
+{
+    <div class="alert alert-info mt-3">@message</div>
+}
+
+@code {
+    private OrderDto model = new();
+    private List<SpecificationDto> specifications = new();
+    private string? message;
+
+    protected override async Task OnInitializedAsync()
+    {
+        specifications = await OrderService.GetSpecificationsAsync() ?? new();
+    }
+
+    private void cancel()
+    {
+        Nav.NavigateTo("/orders");
+    }
+
+    private async Task HandleSubmit()
+    {
+        var success = await OrderService.CreateAsync(model);
+        if (success)
+        {
+            message = "Order created successfully!";
+            await Task.Delay(1000);
+            Nav.NavigateTo("/orders");
+        }
+        else
+        {
+            message = "Failed to create order.";
+        }
+    }
+}
+ *@

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ECOMMERCE.SUBMISSION.PROCESS.PRODUCTION": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}

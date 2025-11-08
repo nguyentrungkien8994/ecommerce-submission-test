@@ -1,0 +1,114 @@
+﻿@* @page "/invoices"
+@attribute [Authorize]
+@inject InvoiceService InvoiceService
+
+<h3>Invoices</h3>
+
+@if (invoices == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (invoices.Count == 0)
+{
+    <p>No invoices found.</p>
+}
+else
+{
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Order Name</th>
+                <th>Status</th>
+                <th style="width:200px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var inv in invoices)
+            {
+                <tr>
+                    <td>@inv.OrderId</td>
+                    <td>@inv.OrderName</td>
+                    <td>
+                        @if (inv.Status == "Paid")
+                        {
+                            <span class="badge bg-success">Paid</span>
+                        }
+                        else if (inv.Status == "Pending")
+                        {
+                            <span class="badge bg-warning text-dark">Pending</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">@inv.Status</span>
+                        }
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-danger me-2" @onclick="() => DeleteInvoice(inv.Id)">Delete</button>
+                        <select class="form-select form-select-sm d-inline w-auto" @onchange="(e) => ChangeStatus(inv.Id, e.Value?.ToString())">
+                            <option disabled selected>Change Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Paid">Paid</option>
+                            <option value="Canceled">Canceled</option>
+                        </select>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (!string.IsNullOrEmpty(message))
+{
+    <div class="alert alert-info mt-3">@message</div>
+}
+
+@code {
+    private List<InvoiceDto>? invoices;
+    private string? message;
+
+    protected override async Task OnInitializedAsync()
+    {
+        invoices = await InvoiceService.GetAllAsync();
+    }
+
+    private async Task DeleteInvoice(string id)
+    {
+        var confirmed = await JS.InvokeAsync<bool>("confirm", "Are you sure you want to delete this invoice?");
+        if (!confirmed) return;
+
+        var result = await InvoiceService.DeleteAsync(id);
+        if (result)
+        {
+            invoices = invoices?.Where(x => x.Id != id).ToList();
+            message = "Invoice deleted successfully.";
+        }
+        else
+        {
+            message = "Failed to delete invoice.";
+        }
+    }
+
+    private async Task ChangeStatus(string id, string? newStatus)
+    {
+        if (string.IsNullOrEmpty(newStatus))
+            return;
+
+        var result = await InvoiceService.ChangeStatusAsync(id, newStatus);
+        if (result)
+        {
+            var invoice = invoices?.FirstOrDefault(i => i.Id == id);
+            if (invoice != null)
+                invoice.Status = newStatus;
+
+            message = $"Invoice status changed to {newStatus}.";
+        }
+        else
+        {
+            message = "Failed to change status.";
+        }
+    }
+
+    [Inject] private IJSRuntime JS { get; set; } = default!;
+}
+ *@

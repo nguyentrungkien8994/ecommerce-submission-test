@@ -1,0 +1,6 @@
+@ECOMMERCE.SUBMISSION.API.EMAIL_HostAddress = http://localhost:5021
+
+GET {{ECOMMERCE.SUBMISSION.API.EMAIL_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,53 @@
+﻿@page "/register"
+@using System.ComponentModel.DataAnnotations
+@rendermode InteractiveServer
+@inject AccountApiClient AccountApi
+@inject NavigationManager NavManager
+
+<EditForm Model="@model" OnValidSubmit="HandleSubmit" FormName="registerForm">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <label>Username</label>
+        <InputText @bind-Value="model.Email" class="form-control" />
+        <ValidationMessage For="@(() => model.Email)" />
+    </div>
+
+    <div class="mb-3">
+        <label>Password</label>
+        <InputText @bind-Value="model.Password" type="password" class="form-control" />
+        <ValidationMessage For="@(() => model.Password)" />
+    </div>
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+</EditForm>
+
+@if (success)
+{
+    <div class="alert alert-success mt-3">Submitted successfully!</div>
+}
+
+@code {
+    private bool success;
+    private LoginModel model = new();
+
+    private async Task HandleSubmit()
+    {
+        await AccountApi.Register(new DTO.RegisterDTO()
+            {
+                email = model.Email,
+                password = model.Password
+            });
+        NavManager.NavigateTo("/login");
+    }
+
+    public class LoginModel
+    {
+        [Required(ErrorMessage = "Please enter email")]
+        public string Email { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Please enter password")]
+        public string Password { get; set; } = string.Empty;
+    }
+}
